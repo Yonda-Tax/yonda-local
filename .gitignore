@@ -1,0 +1,21 @@
+# Local Python environments
+.venv/
+*.pyc
+__pycache__/
+
+# Pytest caches & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment files
+.env
+.env.*
+
+# macOS cruft
+.DS_Store
+
+# Editor settings
+.idea/
+.vscode/
+

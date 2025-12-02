@@ -1,0 +1,47 @@
+services:
+  localstack:
+    image: localstack/localstack
+    container_name: yonda-localstack
+    environment:
+      DEFAULT_REGION: us-east-1
+      DEBUG: "1"
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_SESSION_TOKEN: test
+    volumes:
+      - localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "4566:4566" # LocalStack Gateway
+      - "4510-4559:4510-4559" # external services port range
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:4.5.0
+    container_name: yonda-dynamodb-admin
+    depends_on:
+      localstack:
+        condition: service_healthy
+    environment:
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      DYNAMO_ENDPOINT: http://localstack:4566
+    ports:
+      - "8001:8001"
+
+  opensearch:
+    image: opensearchproject/opensearch:2
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - _JAVA_OPTIONS=-XX:UseSVE=0
+      - OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g
+    volumes:
+      - "${OPENSEARCH_VOLUME_DIR:-./volume}:/usr/share/opensearch/data"
+
+volumes:
+  localstack-data:
+  opensearch-data:
+
