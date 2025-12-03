@@ -95,7 +95,9 @@ uv run pytest -m incremental
 ```
 
 To run against dev or prod environments, export credentials from the [AWS Access Portal](https://d-9c67596e31.awsapps.com/start/#/) for the respective
-account then export the relevant .env file:
+account then export the relevant .env file.
+
+Running against production should only be done in exceptional circumstances. Speak to another member of the team before embarking on this path.
 ```bash
 # For dev
 export $(grep -v '^#' tests/dev.env | xargs)
