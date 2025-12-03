@@ -67,7 +67,7 @@ git clone git@github.com:Yonda-Tax/heimdall.git
 
 ### Tests
 
-To run the tests, first set up a python environment andi nstall dependencies and run pytest via uv:
+To run the tests, first set up a python environment and install dependencies and run pytest via uv:
 
 ```bash
 uv venv -p 3.13 --clear
