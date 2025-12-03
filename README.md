@@ -21,7 +21,6 @@ Services exposed locally:
 - LocalStack edge: `http://localhost:4566`
 - DynamoDB Admin UI: `http://localhost:8001`
 - OpenSearch: `http://localhost:9200`
-- PostgreSQL: `localhost:5432` (`yonda` / `yonda` / db `yonda_local`)
 
 ### Component Services
 
@@ -48,26 +47,60 @@ git clone git@github.com:Yonda-Tax/knox-ingestion.git
 
 #### Alchemy
 
+1. Clone the [alchemy](https://github.com/Yonda-Tax/alchemy) repo
+```
+git clone git@github.com:Yonda-Tax/alchemy.git
+```
+
+2. Follow the setup instructions in the alchemy [README.md](https://github.com/Yonda-Tax/alchemy/blob/main/README.md#setting-up-a-development-environment)
+
 
 #### Heimdall
+
+1. Clone the [alchemy](https://github.com/Yonda-Tax/heimdall) repo
+```
+git clone git@github.com:Yonda-Tax/heimdall.git
+```
+
+2. Follow the setup instructions in the heimdall [README.md](https://github.com/Yonda-Tax/heimdall/blob/main/README.md#setting-up-a-development-environment)
 
 
 ### Tests
 
-Install dependencies and run pytest via uv:
+To run the tests, first set up a python environment andi nstall dependencies and run pytest via uv:
 
 ```bash
+uv venv -p 3.13 --clear
+. .venv/bin/activate
 uv sync
-uv run pytest
+uv pip install -e .
 ```
 
-The supplied smoke test is skipped by default. Provide a reachable service and opt-in via:
-
+To validate that all the component services are up and running, you can just run the smoke tests:
 ```bash
-export YONDA_ENABLE_SMOKE=1
-export YONDA_BASE_URL=http://localhost:8080  # customize if needed
+export $(grep -v '^#' tests/local.env | xargs)
 uv run pytest -m smoke
 ```
 
-`tests/conftest.py` exposes fixtures for the base URL, HTTP timeouts, and a shared `httpx.AsyncClient` so future integration tests can remain concise.
+Run all the tests with:
+```bash
+export $(grep -v '^#' tests/local.env | xargs)
+uv run pytest
+```
 
+Or just the integration tests with:
+```bash
+export $(grep -v '^#' tests/local.env | xargs)
+uv run pytest -m incremental
+```
+
+To run against dev or prod environments, export credentials from the [AWS Access Portal](https://d-9c67596e31.awsapps.com/start/#/) for the respective
+account then export the relevant .env file:
+```bash
+# For dev
+export $(grep -v '^#' tests/dev.env | xargs)
+uv run pytest -m smoke
+# For prod
+export $(grep -v '^#' tests/prod.env | xargs)
+uv run pytest -m smoke
+```

@@ -2,6 +2,8 @@
 .venv/
 *.pyc
 __pycache__/
+*.pytest_cache/
+*.egg-info/
 
 # Pytest caches & coverage
 .pytest_cache/
