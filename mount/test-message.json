@@ -1,0 +1,69 @@
+{
+  "id": "test-transaction-123",
+  "version": 3,
+  "transaction_data": {
+    "transaction_type": "Order",
+    "sales_channel_type": "Webshop",
+    "transaction_date": "2024-01-15T10:30:00Z",
+    "exemption_type": "other",
+    "currency": "USD",
+    "net_receipt_pre_tax": 100.00,
+    "shipping_receipt_pre_tax": 10.00,
+    "tax_charged": 8.00,
+    "shipping_to_address": {
+      "street": "123 Main St",
+      "city": "New York",
+      "postal_code": "10001",
+      "state": "NY",
+      "country": "US"
+    },
+    "shipping_from_address": {
+      "street": "456 Warehouse Blvd",
+      "city": "Los Angeles",
+      "postal_code": "90001",
+      "state": "CA",
+      "country": "US"
+    },
+    "billing_address": {
+      "street": "123 Main St",
+      "city": "New York",
+      "postal_code": "10001",
+      "state": "NY",
+      "country": "US"
+    },
+    "is_deleted": false,
+    "metadata": {
+      "standard_template_records_id": 1,
+      "meta_sale_platform": "shopify",
+      "data_source": "test",
+      "data_source_url": null,
+      "organization_id": "550e8400-e29b-41d4-a716-446655440000",
+      "batch_id": "batch-123",
+      "batch_date": "2024-01-15T10:00:00Z",
+      "customer_id": "customer-123",
+      "order_number": "ORDER-123",
+      "meta_integration_id": "integration-123",
+      "meta_integration_type": "shopify",
+      "edited_by": null,
+      "deletion_job_id": null,
+      "deleted_at": null,
+      "transaction_standard_template_record_versions": null,
+      "transaction_number": null,
+      "refund_id": null
+    }
+  },
+  "line_item_data": [
+    {
+      "sku": "SKU-001",
+      "item_description": "Test Product",
+      "item_quantity": 2,
+      "item_price": 50.00,
+      "item_discount": 0.00,
+      "metadata": {
+        "standard_template_records_id": 1,
+        "line_id": "line-1",
+        "transaction_number": null
+      }
+    }
+  ]
+}
